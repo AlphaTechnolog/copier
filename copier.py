@@ -1,25 +1,24 @@
-import pyperclip
 from cli import cli
-from rc import RcManager
-from log import error, success, info
+from consts import STRNULL
+from log import error
+from commands.registry import _registry
+from commands.subcommand import Subcommand
 
 
 class App:
     def __init__(self):
-        self.args = cli()
-        self.rc_manager = RcManager()
-        self.config = self.rc_manager.parse()
+        self.args = vars(cli())
+        self._validate_args()
 
-    def copy_credential(self, credential: str):
-        info(f'Copying "{credential}" to your clipboard...')
-        pyperclip.copy(credential)
-        success('Copied successfully to your clipboard, try using Ctrl-Shift-v')
-
+    def _validate_args(self):
+        if self.args['command'] == 'copy' and self.args['credential'] == STRNULL:
+            error("Can't bypass credential if command is copy")
 
     def main(self):
-        if not self.args.credential in self.config['credentials']:
-            error(f'"{self.args.credential}" does not exists in your credentials')
-        self.copy_credential(self.config['credentials'][self.args.credential])
+        if not self.args['command'] in _registry:
+            error('Invalid command suplied, it no are registered')
+        Command: Subcommand = _registry[self.args['command']]
+        Command(self.args)
 
 
 if __name__ == '__main__':
