@@ -6,7 +6,7 @@ stderrecho() {
 }
 
 error () {
-    stderrecho $1
+    stderrecho "$1"
     exit 1
 }
 
