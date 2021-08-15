@@ -7,7 +7,7 @@ stderrecho() {
     >&2 echo "${1:-A sample standard error message}"
 }
 
-stderrecho "This program uses sudo to create files and folders in /opt"
+stderrecho "This program use sudo to create files and folders in /opt"
 stderrecho "Check the source code of this script in https://github.com/AlphaTechnolog/copier/blob/master/bin/install.sh"
 
 if [ -d /opt/copier ]; then
