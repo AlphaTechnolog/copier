@@ -43,7 +43,7 @@ fi
 
 printf "OK.\nMoving the source code to /opt/copier... "
 cd ./copier-src
-python3 -m pip install -r ./requirements.txt
+python3 -m pip install -r ./requirements.txt > /dev/null 2>&1
 cd ..
 sudo mv ./copier-src /opt/copier
 sudo chmod -R 777 /opt/copier /opt/copier/*
