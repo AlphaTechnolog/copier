@@ -12,3 +12,9 @@ class RcManager:
     def parse(self) -> Dict[str, V]:
         with open(rc_path, 'r') as configfile:
             return json.load(configfile)
+
+    def dump(self, new_dct: Dict[str, V]) -> Dict[str, V]:
+        with open(rc_path, 'w') as configfile:
+            json.dump(new_dct, configfile)
+
+        return self.parse()

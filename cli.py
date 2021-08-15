@@ -22,5 +22,21 @@ def cli() -> argparse.Namespace:
         required=False,
         default=STRNULL
     )
+    config_parser_subparsers = config_parser.add_subparsers(title='subcommands')
+    config_parser_subparsers_create_parser = config_parser_subparsers.add_parser(
+        'create',
+        help='Create a new credential from your command line'
+    )
+    config_parser_subparsers_create_parser.set_defaults(command='config__create')
+    config_parser_subparsers_create_parser.add_argument(
+        '-k', '--key',
+        help='The credential key name',
+        required=True
+    )
+    config_parser_subparsers_create_parser.add_argument(
+        '-v', '--value',
+        help='The credential value',
+        required=True
+    )
 
     return parser.parse_args()

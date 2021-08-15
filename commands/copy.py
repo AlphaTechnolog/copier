@@ -10,7 +10,7 @@ class Copy(Subcommand):
         self.rc_manager = RcManager()
         self.config = self.rc_manager.parse()
 
-    def copy_credential(self, credential: str):
+    def copy_credential(self, credential: str) -> int:
         info(f'Copying "{credential}" to your clipboard...')
         pyperclip.copy(str(credential))
         success('Copied successfully to your clipboard, try using Ctrl-Shift-V on your terminal to paste it!')
