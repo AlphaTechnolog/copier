@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from cli import cli
 from consts import STRNULL
 from log import error
