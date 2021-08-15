@@ -15,7 +15,7 @@ if [ -d /opt/copier ]; then
     sudo rm -rf /opt/copier
 fi
 
-if [ -f /usr/bin/copier ]; then
+if [ -L /usr/bin/copier ]; then
     stderrecho "Already exists /usr/bin/copier, removing it..."
     sudo rm /usr/bin/copier
 fi
