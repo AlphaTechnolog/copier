@@ -7,41 +7,21 @@ stderrecho() {
     >&2 echo "${1:-A sample standard error message}"
 }
 
-error() {
-    stderrecho $1
-    exit 1
-}
-
-confirm() {
-    # call with a prompt string or use a default
-    read -r -p "${1:-Are you sure? [y/N]} " response
-    case "$response" in
-        [yY][eE][sS]|[yY]) 
-            true
-            ;;
-        *)
-            false
-            ;;
-    esac
-}
-
 stderrecho "This program uses sudo to create files and folders in /opt"
-stderrecho "Check the source code of this script in ..."
+stderrecho "Check the source code of this script in https://github.com/AlphaTechnolog/copier/blob/master/bin/install.sh"
 
 if [ -d /opt/copier ]; then
-    if confirm "Already exists /opt/copier, delete it? [y/N]"; then
-        sudo rm -rf /opt/copier
-    else
-        error "Already exists /opt/copier, the user not delete the folder"
-    fi
+    stderrecho "Already exists /opt/copier, removing it..."
+    sudo rm -rf /opt/copier
 fi
 
 if [ -f /usr/bin/copier ]; then
-    if confirm "Already exists /usr/bin/copier, delete it? [y/N]"; then
-        sudo rm /usr/bin/copier
-    else
-        echo "Already exists /usr/bin/copier, the user not delete the file"
-    fi
+    stderrecho "Already exists /usr/bin/copier, removing it..."
+    sudo rm /usr/bin/copier
+fi
+
+if [ -d .copier-install-tmp ]; then
+    rm -rf ./.copier-install-tmp
 fi
 
 mkdir -p .copier-install-tmp
