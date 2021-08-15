@@ -16,5 +16,11 @@ def cli() -> argparse.Namespace:
     subparsers = parser.add_subparsers(title='subcommands')
     config_parser = subparsers.add_parser('config', help='Manage the copier config')
     config_parser.set_defaults(command='config')
+    config_parser.add_argument(
+        '-k', '--key',
+        help='Search by key into your config',
+        required=False,
+        default=STRNULL
+    )
 
     return parser.parse_args()

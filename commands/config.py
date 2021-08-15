@@ -2,6 +2,7 @@ from commands.subcommand import Subcommand, V
 from typing import Dict
 from formatter import Formatter
 from rc import RcManager
+from consts import STRNULL
 
 
 class Config(Subcommand):
@@ -12,6 +13,11 @@ class Config(Subcommand):
 
     def main(self, args: Dict[str, V]) -> int:
         self.meta(args)
-        self.formatter.set_dct(self.config)
+        dct = self.config
+        if not args['key'] is STRNULL:
+            dct = dict()
+            dct[args['key']] = self.config['credentials'][args['key']]
+
+        self.formatter.set_dct(dct)
         self.formatter.format_and_print()
         return 0
