@@ -7,7 +7,7 @@ Copy your credentials more easy.
 To install use the `install.sh` script:
 
 ```sh
-# install script later
+curl -sL https://raw.githubusercontent.com/AlphaTechnolog/copier/master/bin/install.sh | bash
 ```
 
 ## Uninstall
@@ -15,7 +15,7 @@ To install use the `install.sh` script:
 To uninstall use the `uninstall.sh` script:
 
 ```sh
-# uninstall script later
+curl -sL https://raw.githubusercontent.com/AlphaTechnolog/copier/master/bin/uninstall.sh | bash
 ```
 
 ## Concepts explain
