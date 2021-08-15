@@ -42,8 +42,13 @@ if [[ $status_code != 0 ]]; then
 fi
 
 printf "OK.\nMoving the source code to /opt/copier... "
+cd ./copier-src
+python3 -m pip install -r ./requirements.txt
+cd ..
 sudo mv ./copier-src /opt/copier
 sudo chmod -R 777 /opt/copier /opt/copier/*
+cd ..
+rm -rf ./.copier-install-tmp
 printf "OK.\nCreating the symbolic link to execute it on your \$PATH... "
 sudo ln -s /opt/copier/copier.py /usr/bin/copier
 sudo chmod -R 777 /usr/bin/copier
