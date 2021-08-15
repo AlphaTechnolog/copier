@@ -7,6 +7,11 @@ stderrecho() {
     >&2 echo "${1:-A sample standard error message}"
 }
 
+error() {
+    stderrecho "$1"
+    exit 1
+}
+
 stderrecho "This program use sudo to create files and folders in /opt"
 stderrecho "Check the source code of this script in https://github.com/AlphaTechnolog/copier/blob/master/bin/install.sh"
 
@@ -36,9 +41,10 @@ git clone https://github.com/AlphaTechnolog/copier.git copier-src > /dev/null 2>
 status_code=$?
 
 if [[ $status_code != 0 ]]; then
+    erroroutput=$(cat .copier-install-error)
     cd ..
     rm -rf .copier-install-tmp
-    error "FAILURE... An error was ocurred when I download copier: " $(cat .copier-install-error)
+    error "FAILURE... An error was ocurred when I download copier: $erroroutput"
 fi
 
 printf "OK.\nMoving the source code to /opt/copier... "
