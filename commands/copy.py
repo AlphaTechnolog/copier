@@ -12,10 +12,6 @@ class Copy(Subcommand):
 
     def copy_credential(self, credential: str) -> int:
         info('Copying to your clipboard...')
-
-        if not pyperclip.is_available():
-            error('Copying functionality is not available')
-
         pyperclip.copy(str(credential))
         success('Copied successfully to your clipboard, try using Ctrl-Shift-V on your terminal to paste it!')
 
